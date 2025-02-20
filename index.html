@@ -34,9 +34,14 @@
         <input type="text" id="itemInput">
         <button onclick="adicionarItem()">Adicionar o Item</button>
     </div>
-    
 
     <ul id="listaItens"></ul>
+
+    <h2>Botao que chama a API</h2>
+    <input type="button" value="Chamar API" onclick="consumirAPI()">
+    <form>
+        <p>Mensagem API: <input type="text" id="API"></p>
+    </form>
     
     <footer id="footer">
         <h2 class="titulo_footer">Footer</h2>
@@ -73,6 +78,18 @@
                 alert("Digite algo antes de enviar");
             }
             
+        }
+
+        function consumirAPI(){
+        fetch("http://demo5075096.mockable.io/lista_exercicio")
+        .then(response => response.json())
+        .then(data => tratarDados(data))
+        .catch(error => console.log(error))
+        }
+
+        function tratarDados(data){
+        console.log(data)
+        document.getElementById("API").value = data.mensagem
         }
     </script>
 

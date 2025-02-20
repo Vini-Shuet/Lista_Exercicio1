@@ -3,15 +3,6 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-y: auto; 
-    display: flex;
-    flex-direction: column;
-}
-
-
-body {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 120px;
 }
 
 header{
