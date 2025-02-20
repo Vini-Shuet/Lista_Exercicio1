@@ -37,11 +37,28 @@
 
     <ul id="listaItens"></ul>
 
-    <h2>Botao que chama a API</h2>
+    <h2>Botao que chama a API(Get)</h2>
     <input type="button" value="Chamar API" onclick="consumirAPI()">
-    <form>
+    <div>
         <p>Mensagem API: <input type="text" id="API"></p>
+    </div>
+
+    <h2>Formulario (Post)</h2>
+
+    <form action="post" id="formulario">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+        <br><br>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+
+        <button type="submit" onclick="enviarDadosAPI()">Enviar</button>
     </form>
+
+    <h3>Resposta do Servidor:</h3>
+    <p id="resposta"></p>
     
     <footer id="footer">
         <h2 class="titulo_footer">Footer</h2>
@@ -91,6 +108,39 @@
         console.log(data)
         document.getElementById("API").value = data.mensagem
         }
+
+        function enviarDadosAPI(){
+            document.getElementById("formulario").addEventListener("submit", async function(event) {
+            event.preventDefault(); 
+
+            let nome = document.getElementById("nome").value;
+            let email = document.getElementById("email").value;
+
+            let dados = {
+                nome: nome,
+                email: email
+            };
+
+            try {
+                let response = await fetch("http://demo5075096.mockable.io/formulario", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(dados)
+                });
+
+                let respostaServidor = await response.json();
+
+                document.getElementById("resposta").innerText = JSON.stringify(respostaServidor, null, 2);
+                
+            } catch (error) {
+                document.getElementById("resposta").innerText = "Erro ao enviar os dados.";
+                console.error("Erro:", error);
+            }
+        })
+        }
+
     </script>
 
 </html>
