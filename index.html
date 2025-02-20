@@ -18,7 +18,6 @@
     
     </header>
 
-    
 
     <h2 class="titulo">Section</h2>
     <section id="imagens">
@@ -31,7 +30,13 @@
     <input type="button" value="Mudar cor do fundo" onclick="mudarCorFundo()">
 
     <h2>Adicionar item</h2>
-    <input type="button" name="Adicionar item" onclick="adicionarItem()">
+    <div class="adicionar-item">
+        <input type="text" id="itemInput">
+        <button onclick="adicionarItem()">Adicionar o Item</button>
+    </div>
+    
+
+    <ul id="listaItens"></ul>
     
     <footer id="footer">
         <h2 class="titulo_footer">Footer</h2>
@@ -51,7 +56,23 @@
         }
 
        function adicionarItem(){
-        
+        let input = document.getElementById("itemInput");
+            let lista = document.getElementById("listaItens");
+
+            if (input.value.trim() !== "") {
+                let novoItem = document.createElement("li");
+                novoItem.textContent = input.value;
+
+                novoItem.ondblclick = function() {
+                    lista.removeChild(novoItem);
+                };
+
+                lista.appendChild(novoItem); 
+                input.value = ""; 
+            } else {
+                alert("Digite algo antes de enviar");
+            }
+            
         }
     </script>
 

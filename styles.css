@@ -1,3 +1,19 @@
+html, body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; 
+    display: flex;
+    flex-direction: column;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 120px;
+}
+
 header{
     display: flex;
     border: black solid 3px;
@@ -32,17 +48,16 @@ li{
     width: 355px;
 }
 
-#footer{
+#footer {
     display: flex;
     background-color: green;
     width: 100%;
-    height: 150px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    height: 100px;
+    position: relative;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-sizing: border-box;
 }
 
 .titulo_footer{
@@ -51,13 +66,15 @@ li{
 }
 
 .img-git{
-    height: 200px;
-    width: 355px;
+    height: 60px; 
+    width: 60px;
 }
 
 .git{
     display: flex;
+    align-items: start;
     align-items: center;
+    max-width: 100%;
 }
 
 .link{
@@ -67,4 +84,22 @@ li{
     padding: 10px 20px;
     font-size: 25px;
     color: white;
+}
+
+.adicionar-item{
+    display: flex;
+    margin: 2px;
+    align-items: center;
+}
+
+#itemInput {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+#listaItens li {
+    font-size: 25px;
+    padding: 5px;
+    cursor: pointer;
 }
