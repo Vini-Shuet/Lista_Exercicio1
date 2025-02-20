@@ -27,8 +27,11 @@
         <img class="imagem" src="https://images.pexels.com/photos/336948/pexels-photo-336948.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Celular">
     </section>
     
-    <h2>Mudar Cor</h2>
-    <input type="button" value="Mudar Cor do fundo" onclick="mudarCorFundo()">
+    <h2>Mudar Cor do titulo</h2>
+    <input type="button" value="Mudar cor do fundo" onclick="mudarCorFundo()">
+
+    <h2>Adicionar item</h2>
+    <input type="button" name="Adicionar item" onclick="adicionarItem()">
     
     <footer id="footer">
         <h2 class="titulo_footer">Footer</h2>
@@ -43,9 +46,13 @@
 
     <script>
         function mudarCorFundo(){
-            
+            document.body.style.backgroundColor = 
+            document.body.style.backgroundColor === "lightblue" ? "white" : "lightblue";
         }
 
+       function adicionarItem(){
+        
+        }
     </script>
 
 </html>
