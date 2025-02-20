@@ -1,0 +1,10 @@
+header{
+    display: flex;
+    border: black solid 3px;
+    background-color: gray;
+}
+
+li{
+    font-size: 75px;
+    color: blue;
+}
