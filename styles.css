@@ -5,6 +5,10 @@ html, body {
     overflow-y: auto; 
 }
 
+h2{
+    text-align: center;
+}
+
 header{
     display: flex;
     border: black solid 3px;
