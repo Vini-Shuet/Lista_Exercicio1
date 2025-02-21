@@ -37,6 +37,21 @@
 <section id="cadastrar-novo">
     <h2>Cadastrar Novo</h2>
     <p>Conteúdo da seção Cadastrar Novo.</p>
+
+    <h2>Formulario (Post) - Ira aparecer no Console</h2>
+
+    <form action="post" id="formulario">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+        <br><br>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+
+        <button type="submit" onclick="enviarDadosAPI()" id="botaoEnviar">Enviar</button>
+    </form>
+
 </section>
 
 <body>
@@ -46,7 +61,7 @@
 <script>
     function exibirDados() {
 
-        fetch("http://demo5075096.mockable.io/listaUsuario")
+        fetch("http://demo5075096.mockable.io/listaIntegracaoCompleta")
             .then(response => response.json())
 
             .then(data => {
@@ -77,6 +92,109 @@
             .catch(error => console.error("Erro ao buscar os dados:", error));
     }
 
+    function deletarDados(linha, user) {
+        linha.remove();
+        alert("Usuário excluído: " + JSON.stringify(user));
+    }
+
+    function atualizarTabela(linha, user) {
+        const cells = linha.querySelectorAll("td");
+        const atualizarButton = linha.querySelector(".atualizarTabela");
+
+        if (atualizarButton.textContent === "Atualizar") {
+
+            cells.forEach((cell, index) => {
+                if (index < 3) {
+                    cell.setAttribute("contenteditable", "true");
+                }
+            });
+            atualizarButton.textContent = "Salvar";
+        } else {
+
+            cells.forEach((cell, index) => {
+                if (index < 3) {
+                    cell.setAttribute("contenteditable", "false");
+                }
+            });
+
+            const nomeEditado = cells[0].innerText;
+            const emailEditado = cells[1].innerText;
+            const idadeEditada = cells[2].innerText;
+
+
+            user.nome = nomeEditado;
+            user.email = emailEditado;
+            user.idade = idadeEditada;
+
+
+            fetch("http://demo5075096.mockable.io/listaIntegracaoCompleta", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(user),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("Erro ao enviar dados para a API");
+                    }
+                })
+                .then(data => {
+
+                    alert("Dados atualizados e enviados com sucesso!");
+                    console.log("Resposta da API:", data);
+                })
+                .catch(error => {
+                    console.error("Erro:", error);
+                    alert("Ocorreu um erro ao enviar os dados para a API.");
+                });
+
+
+            atualizarButton.textContent = "Atualizar";
+        }
+    }
+
+    function enviarDadosAPI() {
+        document.getElementById("formulario").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+
+            let nome = document.getElementById("nome").value;
+            let email = document.getElementById("email").value;
+
+            let dados = {
+                nome: nome,
+                email: email
+            };
+
+            let response = await fetch("https://cors-anywhere.herokuapp.com/http://demo5075096.mockable.io/listaIntegracaoCompleta", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dados)
+            });
+
+            try {
+                let response = await fetch("http://demo5075096.mockable.io/listaIntegracaoCompleta", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(dados)
+                });
+
+                let respostaServidor = await response.json();
+
+                console.log("Resposta da API:", respostaServidor);
+
+            } catch (error) {
+                console.error("Erro ao enviar os dados:", error);
+            }
+        });
+    }
 </script>
 
 </html>
