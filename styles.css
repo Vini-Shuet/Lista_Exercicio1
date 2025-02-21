@@ -94,3 +94,7 @@ li{
     padding: 5px;
     cursor: pointer;
 }
+
+#tabelaDeDados{
+    border: 1px solid black;
+}

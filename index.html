@@ -42,6 +42,8 @@
     <div>
         <p>Mensagem API: <input type="text" id="API"></p>
     </div>
+    <h3>Resposta do Servidor:</h3>
+    <p id="resposta"></p>
 
     <h2>Formulario (Post)</h2>
 
@@ -57,8 +59,20 @@
         <button type="submit" onclick="enviarDadosAPI()">Enviar</button>
     </form>
 
-    <h3>Resposta do Servidor:</h3>
-    <p id="resposta"></p>
+    <h2>Exibir dados na tabela</h2>
+    <button onclick="exibirDadados()">Carregar Dados</button>
+    <table id="tabelaDeDados">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Idade</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
     
     <footer id="footer">
         <h2 class="titulo_footer">Footer</h2>
@@ -139,6 +153,30 @@
                 console.error("Erro:", error);
             }
         })
+        }
+
+        function exibirDadados() {
+            fetch("http://demo5075096.mockable.io/listaUsuario")
+            .then(response => response.json())
+
+            .then(data => { 
+
+            let corpoTabela = document.querySelector("#tabelaDeDados tbody");
+            corpoTabela.innerHTML = "";
+
+            data.forEach(user => {
+                let linha = document.createElement("tr");
+
+                linha.innerHTML = `
+                    <td>${user.nome}</td>
+                    <td>${user.email}</td>
+                    <td>${user.idade}</td>`
+                ;
+
+                corpoTabela.appendChild(linha);
+            });
+        })
+        .catch(error => console.error("Erro ao buscar os dados:", error));
         }
 
     </script>
