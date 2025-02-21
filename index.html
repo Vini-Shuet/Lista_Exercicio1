@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,126 +10,150 @@
 
 <body>
     <h1>Atividade 1</h1>
-    <h2 class="titulo">Header</h2>
     <header>
+        <h2>Header</h2>
+        <h1>Lista de Atividades 1</h1>
         <nav>
             <li>Opcao 1</li>
-            <li>Opcao 2</li>            
+            <li>Opcao 2</li>
         </nav>
-    
     </header>
 
 
     <h2 class="titulo">Section</h2>
     <section id="imagens">
-       <img class="imagem" src="https://images.pexels.com/photos/997121/pexels-photo-997121.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Gramado">
-        <img class="imagem" src="https://images.pexels.com/photos/424436/pexels-photo-424436.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Placa de video">
-        <img class="imagem" src="https://images.pexels.com/photos/336948/pexels-photo-336948.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Celular">
+        <img class="imagem"
+            src="https://images.pexels.com/photos/997121/pexels-photo-997121.jpeg?auto=compress&cs=tinysrgb&w=400"
+            alt="Gramado">
+        <img class="imagem"
+            src="https://images.pexels.com/photos/424436/pexels-photo-424436.jpeg?auto=compress&cs=tinysrgb&w=400"
+            alt="Placa de video">
+        <img class="imagem"
+            src="https://images.pexels.com/photos/336948/pexels-photo-336948.jpeg?auto=compress&cs=tinysrgb&w=600"
+            alt="Celular">
     </section>
-    
-    <h2>Mudar Cor do titulo</h2>
-    <input type="button" value="Mudar cor do fundo" onclick="mudarCorFundo()">
 
-    <h2>Adicionar item</h2>
-    <div class="adicionar-item">
-        <input type="text" id="itemInput">
+    <section class="corTitulo">
+        <h2>Mudar Cor do Fundo</h2>
+        <input class="botoes" type="button" value="Mudar cor do fundo" onclick="mudarCorFundo()">
+    </section>
+
+
+    <section class="itensAdicionados">
+        <h2>Adicionar item</h2>
         <button onclick="adicionarItem()">Adicionar o Item</button>
-    </div>
+        <input type="text" id="itemInput">
+        <ul id="listaItens"></ul>
+    </section>
 
-    <ul id="listaItens"></ul>
+    <section class="chamarApi">
+        <h2>Botao que chama a API(Get)</h2>
+        <h3>Resposta do Servidor estara no Console</h3>
+        <input type="button" value="Chamar API" onclick="consumirAPI()">
+        <div>
+            <p>Mensagem API: <input type="text" id="API"></p>
+        </div>
+    </section>
 
-    <h2>Botao que chama a API(Get)</h2>
-    <input type="button" value="Chamar API" onclick="consumirAPI()">
-    <div>
-        <p>Mensagem API: <input type="text" id="API"></p>
-    </div>
-    <h3>Resposta do Servidor:</h3>
-    <p id="resposta"></p>
+    <section class="formularioPost">
+        <h2>Formulario (Post) - Ira aparecer no Console</h2>
 
-    <h2>Formulario (Post)</h2>
+        <form action="post" id="formulario">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome">
+            <span id="erroNome" style="color: red;"></span>
+            <br><br>
 
-    <form id="formulario">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome">
-        <span id="erroNome" style="color: red;"></span>
-        <br><br>
-    
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email">
-        <span id="erroEmail" style="color: red;"></span>
-        <br><br>
-    
-        <button type="submit" id="botaoEnviar">Enviar</button>
-    </form>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email">
+            <span id="erroEmail" style="color: red;"></span>
+            <br><br>
 
-    <h2>Exibir dados na tabela</h2>
-    <button onclick="exibirDadados()">Carregar Dados</button>
-    <button onclick="filtrarIdade()">Mostrar apenas maiores de 18 anos</button>
-    <table id="tabelaDeDados">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Idade</th>
-            </tr>
-        </thead>
-        <tbody>
+            <button type="submit" onclick="enviarDadosAPI()" id="botaoEnviar">Enviar</button>
+        </form>
+    </section>
 
-        </tbody>
-    </table>
-    
+    <section class="dadosTabela">
+
+        <h2>Exibir dados na tabela</h2>
+        <button onclick="exibirDados()">Carregar Dados</button>
+        <button onclick="filtrarIdade()">Mostrar apenas maiores de 18 anos</button>
+        <table id="tabelaDeDados" border="1">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Idade</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+    </section>
+
     <footer id="footer">
         <h2 class="titulo_footer">Footer</h2>
         <div class="git">
             <img src="./imagens/211904_social_github_icon.png" alt="GitHub">
             <a class="link" href="https://github.com/ViniShuet" target="_blank">Link para Github</a>
         </div>
-            
+
     </footer>
 
 </body>
 
-    <script>
-        function mudarCorFundo(){
-            document.body.style.backgroundColor = 
+<script>
+    function mudarCorFundo() {
+        document.body.style.backgroundColor =
             document.body.style.backgroundColor === "lightblue" ? "white" : "lightblue";
-        }
+    }
 
-       function adicionarItem(){
+    function adicionarItem() {
         let input = document.getElementById("itemInput");
-            let lista = document.getElementById("listaItens");
+        let lista = document.getElementById("listaItens");
 
-            if (input.value.trim() !== "") {
-                let novoItem = document.createElement("li");
-                novoItem.textContent = input.value;
+        if (input.value.trim() !== "") {
+            let novoItem = document.createElement("li");
+            novoItem.textContent = input.value;
 
-                novoItem.ondblclick = function() {
-                    lista.removeChild(novoItem);
-                };
+            novoItem.ondblclick = function () {
+                lista.removeChild(novoItem);
+            };
 
-                lista.appendChild(novoItem); 
-                input.value = ""; 
-            } else {
-                alert("Digite algo antes de enviar");
-            }
-            
+            lista.appendChild(novoItem);
+            input.value = "";
+        } else {
+            alert("Digite algo antes de enviar");
         }
 
-        function consumirAPI(){
+    }
+
+    function consumirAPI() {
         fetch("http://demo5075096.mockable.io/lista_exercicio")
-        .then(response => response.json())
-        .then(data => tratarDados(data))
-        .catch(error => console.log(error))
-        }
+            .then(response => response.json())
+            .then(data => tratarDados(data))
+            .catch(error => console.log(error))
+    }
 
-        function tratarDados(data){
+    function tratarDados(data) {
         console.log(data)
         document.getElementById("API").value = data.mensagem
-        }
+    }
 
-        function enviarDadosAPI(){
-            document.getElementById("formulario").addEventListener("submit", async function(event) {
-            event.preventDefault(); 
+    function enviarDadosAPI() {
+        document.getElementById("formulario").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+
+
+            if (!validarFormulario(event)) {
+                event.preventDefault();
+                return;
+            }
+
+            event.preventDefault();
 
             let nome = document.getElementById("nome").value;
             let email = document.getElementById("email").value;
@@ -137,6 +162,14 @@
                 nome: nome,
                 email: email
             };
+
+            let response = await fetch("https://cors-anywhere.herokuapp.com/http://demo5075096.mockable.io/formulario", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dados)
+            });
 
             try {
                 let response = await fetch("http://demo5075096.mockable.io/formulario", {
@@ -149,88 +182,22 @@
 
                 let respostaServidor = await response.json();
 
-                document.getElementById("resposta").innerText = JSON.stringify(respostaServidor, null, 2);
-                
+                console.log("Resposta da API:", respostaServidor);
+
             } catch (error) {
-                document.getElementById("resposta").innerText = "Erro ao enviar os dados.";
-                console.error("Erro:", error);
+                console.error("Erro ao enviar os dados:", error);
             }
-        })
-        }
-
-        function exibirDadados() {
-            fetch("http://demo5075096.mockable.io/listaUsuario")
-            .then(response => response.json())
-
-            .then(data => { 
-
-            let corpoTabela = document.querySelector("#tabelaDeDados tbody");
-            corpoTabela.innerHTML = "";
-
-            data.forEach(user => {
-
-                let linha = document.createElement("tr");
-
-                linha.innerHTML = `
-                    <td>${user.nome}</td>
-                    <td>${user.email}</td>
-                    <td>${user.idade}</td>
-                    </td>
-                     <td>
-                    <button class="atualizarTabela">Atualizar</button>
-                    <button class="deletarDados">Excluir</button>
-                     </td>`
-                ;
-
-                corpoTabela.appendChild(linha);
-                linha.querySelector(".atualizarTabela").addEventListener("click", () => atualizarTabela(linha, user));
-                linha.querySelector(".deletarDados").addEventListener("click", () => deletarDados(linha, user));
-            });
-        })
-        .catch(error => console.error("Erro ao buscar os dados:", error));
-        }
-
-        function filtrarIdade(){
-             fetch("http://demo5075096.mockable.io/listaUsuario")
-            .then(response => response.json())
-            .then(data => {
-
-                let menoresDeIdade = data.filter(user => user.idade < 18);
-
-                let corpoTabela = document.querySelector ("#tabelaDeDados tbody");
-                corpoTabela.innerHTML = "";
-
-                menoresDeIdade.forEach(user => {
-                let linha = document.createElement("tr");
-
-                linha.innerHTML = `
-                    <td>${user.nome}</td>
-                    <td>${user.email}</td>
-                    <td>${user.idade}</td>`
-                ;
-
-                corpoTabela.appendChild(linha);
-            });
-
-            console.log("Usuários menores de idade:", menoresDeIdade);
-        })
-        .catch(error => console.error("Erro ao buscar os dados:", error));
-
-        }
-
-        function deletarDados(linha, user) {
-        linha.remove();
-        alert("Usuário excluído: " + JSON.stringify(user));
+        });
     }
 
     document.getElementById("formulario").addEventListener("submit", validarFormulario);
-    
+
     function validarFormulario(event) {
         let nome = document.getElementById("nome").value.trim();
         let email = document.getElementById("email").value.trim();
         let erroNome = document.getElementById("erroNome");
         let erroEmail = document.getElementById("erroEmail");
-        
+
         erroNome.textContent = "";
         erroEmail.textContent = "";
 
@@ -245,10 +212,141 @@
             valido = false;
         }
 
-        if (!valido) {
-            event.preventDefault();
+        return valido;
+    }
+
+    function exibirDados() {
+        fetch("http://demo5075096.mockable.io/listaUsuario")
+            .then(response => response.json())
+
+            .then(data => {
+
+                let corpoTabela = document.querySelector("#tabelaDeDados tbody");
+                corpoTabela.innerHTML = "";
+
+                data.forEach(user => {
+
+                    let linha = document.createElement("tr");
+
+                    linha.innerHTML = `
+                    <td>${user.nome}</td>
+                    <td>${user.email}</td>
+                    <td>${user.idade}</td>
+                    </td>
+                     <td>
+                    <button class="atualizarTabela">Atualizar</button>
+                    <button class="deletarDados">Excluir</button>
+                     </td>`
+                        ;
+
+                    corpoTabela.appendChild(linha);
+                    linha.querySelector(".atualizarTabela").addEventListener("click", () => atualizarTabela(linha, user));
+                    linha.querySelector(".deletarDados").addEventListener("click", () => deletarDados(linha, user));
+                });
+            })
+            .catch(error => console.error("Erro ao buscar os dados:", error));
+    }
+
+    function filtrarIdade() {
+        fetch("http://demo5075096.mockable.io/listaUsuario")
+            .then(response => response.json())
+            .then(data => {
+
+                let menoresDeIdade = data.filter(user => user.idade < 18);
+
+                let corpoTabela = document.querySelector("#tabelaDeDados tbody");
+                corpoTabela.innerHTML = "";
+
+                menoresDeIdade.forEach(user => {
+                    let linha = document.createElement("tr");
+
+                    linha.innerHTML = `
+                    <td>${user.nome}</td>
+                    <td>${user.email}</td>
+                    <td>${user.idade}</td>
+                    <td>
+                    <button class="atualizarTabela">Atualizar</button>
+                    <button class="deletarDados">Excluir</button>
+                     </td>`
+                        ;
+
+                    corpoTabela.appendChild(linha);
+                    linha.querySelector(".atualizarTabela").addEventListener("click", () => atualizarTabela(linha, user));
+                    linha.querySelector(".deletarDados").addEventListener("click", () => deletarDados(linha, user));
+                });
+
+                console.log("Usuários menores de idade:", menoresDeIdade);
+            })
+            .catch(error => console.error("Erro ao buscar os dados:", error));
+
+    }
+
+    function deletarDados(linha, user) {
+        linha.remove();
+        alert("Usuário excluído: " + JSON.stringify(user));
+    }
+
+    function atualizarTabela(linha, user) {
+        const cells = linha.querySelectorAll("td");
+        const atualizarButton = linha.querySelector(".atualizarTabela");
+
+        if (atualizarButton.textContent === "Atualizar") {
+
+            cells.forEach((cell, index) => {
+                if (index < 3) {
+                    cell.setAttribute("contenteditable", "true");
+                }
+            });
+            atualizarButton.textContent = "Salvar";
+        } else {
+
+            cells.forEach((cell, index) => {
+                if (index < 3) {
+                    cell.setAttribute("contenteditable", "false");
+                }
+            });
+
+            const nomeEditado = cells[0].innerText;
+            const emailEditado = cells[1].innerText;
+            const idadeEditada = cells[2].innerText;
+
+
+            user.nome = nomeEditado;
+            user.email = emailEditado;
+            user.idade = idadeEditada;
+
+
+            fetch("http://demo5075096.mockable.io/listaUsuario", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(user),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("Erro ao enviar dados para a API");
+                    }
+                })
+                .then(data => {
+
+                    alert("Dados atualizados e enviados com sucesso!");
+                    console.log("Resposta da API:", data);
+                })
+                .catch(error => {
+                    console.error("Erro:", error);
+                    alert("Ocorreu um erro ao enviar os dados para a API.");
+                });
+
+
+            atualizarButton.textContent = "Atualizar";
         }
     }
-    </script>
+
+
+
+</script>
 
 </html>
