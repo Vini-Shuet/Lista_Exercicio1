@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 10</title>
+    <link rel="stylesheet" href="styleIntegracao.css">
+</head>
+<header>
+    <nav>
+        <a href="#listar-dados">Listar Dados</a>
+        <a href="#cadastrar-novo">Cadastrar Novo</a>
+    </nav>
+</header>
+
+<section id="listar-dados">
+    <h2>Listar Dados</h2>
+    <p>Conteúdo da seção Listar Dados.</p>
+
+    <h2>Exibir dados na tabela</h2>
+    <button onclick="exibirDados()">Carregar Dados</button>
+    <table id="tabelaDeDados" border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Idade</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</section>
+
+<section id="cadastrar-novo">
+    <h2>Cadastrar Novo</h2>
+    <p>Conteúdo da seção Cadastrar Novo.</p>
+</section>
+
+<body>
+
+</body>
+
+<script>
+    function exibirDados() {
+
+        fetch("http://demo5075096.mockable.io/listaUsuario")
+            .then(response => response.json())
+
+            .then(data => {
+
+                let corpoTabela = document.querySelector("#tabelaDeDados tbody");
+                corpoTabela.innerHTML = "";
+
+                data.forEach(user => {
+
+                    let linha = document.createElement("tr");
+
+                    linha.innerHTML = `
+                    <td>${user.nome}</td>
+                    <td>${user.email}</td>
+                    <td>${user.idade}</td>
+                    </td>
+                     <td>
+                    <button class="atualizarTabela">Atualizar</button>
+                    <button class="deletarDados">Excluir</button>
+                     </td>`
+                        ;
+
+                    corpoTabela.appendChild(linha);
+                    linha.querySelector(".atualizarTabela").addEventListener("click", () => atualizarTabela(linha, user));
+                    linha.querySelector(".deletarDados").addEventListener("click", () => deletarDados(linha, user));
+                });
+            })
+            .catch(error => console.error("Erro ao buscar os dados:", error));
+    }
+
+</script>
+
+</html>
