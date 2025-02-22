@@ -9,25 +9,80 @@ h2{
     text-align: center;
 }
 
-header{
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 120px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #fff;
+}
+
+h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #fff;
+}
+
+header {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 99%;
     height: 80px;
     background: #333;
     color: white;
     text-align: center;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
-nav{
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
     list-style: none;
 }
 
-a{
+nav a {
     text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+nav li {
+    color: #fff;
+    font-size: 15px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+nav li:hover {
+    background-color: #555;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .titulo{

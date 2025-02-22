@@ -2,28 +2,128 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    background-color: #f9f9f9;
 }
+
 header {
-    background-color: #333;
+    width: 100%;
+    background-color: #007BFF;
     color: white;
-    padding: 10px 20px;
+    padding: 15px 0;
     text-align: center;
-    position: sticky;
-    top: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
 header nav a {
     color: white;
     text-decoration: none;
     margin: 0 15px;
     font-size: 18px;
+    transition: color 0.3s ease;
 }
+
+header nav a:hover {
+    color: #f1f1f1;
+}
+
 section {
-    padding: 60px 20px;
-    height: 100vh;
+    width: 80%;
+    max-width: 1000px;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 #listar-dados {
     background-color: #f4f4f4;
 }
+
 #cadastrar-novo {
     background-color: #e2e2e2;
+}
+
+
+#tabelaDeDados {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#tabelaDeDados thead {
+    background-color: #007BFF;
+    color: white;
+}
+
+#tabelaDeDados th,
+#tabelaDeDados td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+
+#tabelaDeDados tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#tabelaDeDados td:first-child {
+    font-weight: bold;
+}
+
+#tabelaDeDados td:nth-child(4) {
+    color: #007BFF;
+}
+
+#tabelaDeDados button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#tabelaDeDados button:hover {
+    background-color: #0056b3;
+}
+
+#formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+#formulario label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#formulario input,
+#formulario select,
+#formulario button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#formulario button {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#formulario button:hover {
+    background-color: #0056b3;
 }

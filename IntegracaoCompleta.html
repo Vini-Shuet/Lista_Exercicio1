@@ -7,55 +7,74 @@
     <title>Exercicio 10</title>
     <link rel="stylesheet" href="styleIntegracao.css">
 </head>
-<header>
-    <nav>
-        <a href="#listar-dados">Listar Dados</a>
-        <a href="#cadastrar-novo">Cadastrar Novo</a>
-    </nav>
-</header>
-
-<section id="listar-dados">
-    <h2>Listar Dados</h2>
-    <p>Conteúdo da seção Listar Dados.</p>
-
-    <h2>Exibir dados na tabela</h2>
-    <button onclick="exibirDados()">Carregar Dados</button>
-    <table id="tabelaDeDados" border="1">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Idade</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
-</section>
-
-<section id="cadastrar-novo">
-    <h2>Cadastrar Novo</h2>
-    <p>Conteúdo da seção Cadastrar Novo.</p>
-
-    <h2>Formulario (Post) - Ira aparecer no Console</h2>
-
-    <form action="post" id="formulario">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
-        <br><br>
-
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required>
-        <br><br>
-
-        <button type="submit" onclick="enviarDadosAPI()" id="botaoEnviar">Enviar</button>
-    </form>
-
-</section>
 
 <body>
+    <header>
+        <nav>
+            <a href="#listar-dados">Listar Dados</a>
+            <a href="#cadastrar-novo">Cadastrar Novo</a>
+        </nav>
+    </header>
 
+    <section id="listar-dados">
+        <h2>Listar Dados</h2>
+        <p>Seção Listar Dados.</p>
+
+        <h2>Exibir dados na tabela</h2>
+        <button onclick="exibirDados()">Carregar Dados</button>
+        <table id="tabelaDeDados">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Idade</th>
+                    <th>Materias</th>
+                    <th>Editar Dados</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </section>
+
+    <section id="cadastrar-novo">
+        <h2>Cadastrar Novo</h2>
+        <p>Seção Cadastrar</p>
+
+        <h2>Formulario</h2>
+        <form id="formulario">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+            <br><br>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+            <br><br>
+
+            <label for="idade">Idade:</label>
+            <input type="number" id="idade" name="idade" required>
+            <br><br>
+
+            <label for="materia">Materia:</label>
+            <select id="materia" name="materia" required>
+                <option value="">Selecione uma materia</option>
+                <option value="Android Kotlin Developer">Android Kotlin Developer</option>
+                <option value="Desenvolvimento Cross Platform">Desenvolvimento Cross Platform</option>
+                <option value="Governança e Melhores Práticas em TI">Governança e Melhores Práticas em TI</option>
+                <option value="Microservice and Web Engineering">Microservice and Web Engineering</option>
+                <option value="Network Management and Monitoring">Network Management and Monitoring</option>
+                <option value="Operating System Tuning and Cognation">Operating System Tuning and Cognation</option>
+                <option value="Programming and Database Management">Programming and Database Management</option>
+            </select>
+            <br><br>
+
+            <button type="submit" id="botaoEnviar" onclick="enviarDadosAPI()">Enviar</button>
+        </form>
+
+        <div id="respostaAPI"></div>
+
+    </section>
 </body>
 
 <script>
@@ -77,6 +96,7 @@
                     <td>${user.nome}</td>
                     <td>${user.email}</td>
                     <td>${user.idade}</td>
+                    <td>${user.materia}</td>
                     </td>
                      <td>
                     <button class="atualizarTabela">Atualizar</button>
@@ -102,17 +122,15 @@
         const atualizarButton = linha.querySelector(".atualizarTabela");
 
         if (atualizarButton.textContent === "Atualizar") {
-
             cells.forEach((cell, index) => {
-                if (index < 3) {
+                if (index < 5) {
                     cell.setAttribute("contenteditable", "true");
                 }
             });
             atualizarButton.textContent = "Salvar";
         } else {
-
             cells.forEach((cell, index) => {
-                if (index < 3) {
+                if (index < 5) {
                     cell.setAttribute("contenteditable", "false");
                 }
             });
@@ -120,12 +138,12 @@
             const nomeEditado = cells[0].innerText;
             const emailEditado = cells[1].innerText;
             const idadeEditada = cells[2].innerText;
-
+            const materiaEditada = cells[3].innerText;
 
             user.nome = nomeEditado;
             user.email = emailEditado;
             user.idade = idadeEditada;
-
+            user.materia = materiaEditada;
 
             fetch("http://demo5075096.mockable.io/listaIntegracaoCompleta", {
                 method: "POST",
@@ -142,15 +160,13 @@
                     }
                 })
                 .then(data => {
-
-                    alert("Dados atualizados e enviados com sucesso!");
+                    mostrarRespostaAPI("Dados atualizados e enviados com sucesso!", "sucesso");
                     console.log("Resposta da API:", data);
                 })
                 .catch(error => {
                     console.error("Erro:", error);
-                    alert("Ocorreu um erro ao enviar os dados para a API.");
+                    mostrarRespostaAPI("Ocorreu um erro ao enviar os dados para a API.", "erro");
                 });
-
 
             atualizarButton.textContent = "Atualizar";
         }
@@ -163,10 +179,19 @@
 
             let nome = document.getElementById("nome").value;
             let email = document.getElementById("email").value;
+            const idade = document.getElementById("idade").value;
+            const materia = document.getElementById("materia").value;
+
+            const materias = [];
+            document.querySelectorAll('input[name="materias"]:checked').forEach(checkbox => {
+                interesses.push(checkbox.value);
+            });
 
             let dados = {
                 nome: nome,
-                email: email
+                email: email,
+                idade: idade,
+                materia: materia
             };
 
             let response = await fetch("https://cors-anywhere.herokuapp.com/http://demo5075096.mockable.io/listaIntegracaoCompleta", {
@@ -194,6 +219,47 @@
                 console.error("Erro ao enviar os dados:", error);
             }
         });
+    }
+
+    document.getElementById("formulario").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+        const idade = document.getElementById("idade").value;
+        const materia = document.getElementById("materia").value;
+
+        const corpoTabela = document.querySelector("#tabelaDeDados tbody");
+        const novaLinha = document.createElement("tr");
+        novaLinha.innerHTML = `
+                <td>${nome}</td>
+                <td>${email}</td>
+                <td>${idade}</td>
+                <td>${materia}</td>
+                <td>
+                    <button class="atualizarTabela">Atualizar</button>
+                    <button class="deletarDados">Excluir</button>
+                </td>`;
+        corpoTabela.appendChild(novaLinha);
+
+        novaLinha.querySelector(".atualizarTabela").addEventListener("click", () => atualizarTabela(novaLinha, { nome, email, idade }));
+        novaLinha.querySelector(".deletarDados").addEventListener("click", () => deletarDados(novaLinha, { nome, email, idade }));
+
+        document.getElementById("formulario").reset();
+
+        alert("Dados adicionados à tabela com sucesso!");
+    });
+
+    function mostrarRespostaAPI(mensagem, tipo) {
+        const respostaDiv = document.getElementById("respostaAPI");
+        respostaDiv.textContent = mensagem;
+        respostaDiv.className = tipo;
+        respostaDiv.style.display = "block";
+
+
+        setTimeout(() => {
+            respostaDiv.style.display = "none";
+        }, 5000);
     }
 </script>
 
